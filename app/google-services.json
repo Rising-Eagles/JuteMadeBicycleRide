@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "987857082876",
+    "firebase_url": "https://jutemadebicycleride.firebaseio.com",
+    "project_id": "jutemadebicycleride",
+    "storage_bucket": "jutemadebicycleride.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987857082876:android:7e897ac17b36f96667ba79",
+        "android_client_info": {
+          "package_name": "com.example.jutemadebicycleride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987857082876-o065airquqtfa5a50fmonreje7qh921r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeG1eRD81Kp9vSGhhC4pvRXNzkth9OR9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987857082876-o065airquqtfa5a50fmonreje7qh921r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
