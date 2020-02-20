@@ -4,7 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
+    android:background="@drawable/background_page_sign_in"
     tools:context=".UserRegistration.SignInActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/sign_in_progbar"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/field_sign_in_mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_below = "@id/sign_in_progbar">
+
+            <ImageView
+                android:id="@+id/icon_user_mobile"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                android:src="@drawable/sign_in_phone_number"/>
+
+            <EditText
+                android:id="@+id/user_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_inputbox_sign_in"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Your mobile no"
+                android:textAlignment="center"
+                android:textColorHint="@color/ColorViolet"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/next_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Next"
+            android:textSize="20dp"
+            android:textColor="@color/ColorBlack"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/background_button_sign_in"
+            android:layout_below="@id/field_sign_in_verify_code"/>
+
+        <LinearLayout
+            android:id="@+id/field_sign_in_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/field_sign_in_mobile_no"
+            android:layout_gravity="center"
+            android:layout_marginTop="-36dp">
+
+            <ImageView
+                android:id="@+id/icon_user_verify_code"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="2dp"
+                android:src="@drawable/sign_in_verification" />
+
+            <EditText
+                android:id="@+id/user_verify_code"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/background_inputbox_sign_in"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Enter verification code"
+                android:textAlignment="center"
+                android:textColorHint="@color/ColorViolet"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/verify_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Sign In"
+            android:textSize="20dp"
+            android:textColor="@color/ColorBlack"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/background_button_sign_in"
+            android:layout_below="@id/verify_sign_in"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

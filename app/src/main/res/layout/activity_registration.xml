@@ -7,4 +7,463 @@
     android:background="@color/ColorSilver"
     tools:context=".UserRegistration.RegistrationActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/field_reg_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/icon_user_name"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_name"/>
+
+                <EditText
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Your name"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below ="@id/field_reg_name">
+
+                <ImageView
+                    android:id="@+id/icon_user_birthday"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_birthday"/>
+                <EditText
+                    android:id="@+id/user_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Your birthday"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textAlignment="center"
+                    android:textStyle="italic"
+                    android:background="@drawable/background_inputbox_reg"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_birthday">
+
+                <ImageView
+                    android:id="@+id/icon_user_address"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_address"/>
+                <EditText
+                    android:id="@+id/user_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Your address"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textAlignment="center"
+                    android:textStyle="italic"
+                    android:background="@drawable/background_inputbox_reg"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_address">
+
+                <ImageView
+                    android:id="@+id/icon_user_gender"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_gender"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background_inputbox_reg">
+
+                    <EditText
+                        android:id="@+id/user_gender"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_selected"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="Your gender"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/ColorViolet"
+                        android:textStyle="italic" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_choice">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/user_gender_choose"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/user_gender_male"
+                                    android:layout_width="65dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Male"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+
+                                <RadioButton
+                                    android:id="@+id/user_gender_female"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Female"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+
+                                <RadioButton
+                                    android:id="@+id/user_gender_others"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Others"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_gender">
+
+                <ImageView
+                    android:id="@+id/icon_user_profession"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_profession"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/background_inputbox_reg">
+
+                    <EditText
+                        android:id="@+id/user_profession"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_selected"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="Your profession"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/ColorViolet"
+                        android:textStyle="italic" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_choice">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/user_profession_choose"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/user_profession_student"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Student"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                                <RadioButton
+                                    android:id="@+id/user_profession_teacher"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Teacher"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                                <RadioButton
+                                    android:id="@+id/user_profession_government_job"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Govt. Job"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                                <RadioButton
+                                    android:id="@+id/user_profession_private_job"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Private Job"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                                <RadioButton
+                                    android:id="@+id/user_profession_own_business"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Own Business"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_cycling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_profession">
+
+                <ImageView
+                    android:id="@+id/icon_user_cycling"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_cycling"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/background_inputbox_reg">
+
+                    <EditText
+                        android:id="@+id/user_cycling"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_selected"
+                        android:hint="Can you do cycling?"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColorHint="@color/ColorViolet"
+                        android:textAlignment="center"
+                        android:textStyle="italic"/>
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/background_inputbox_option_choice">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/user_cycling_choose"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/user_cycling_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="Yes"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                                <RadioButton
+                                    android:id="@+id/user_cycling_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="No"
+                                    android:textColor="@color/ColorGreenDark"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold"/>
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_cycling">
+
+                <ImageView
+                    android:id="@+id/icon_user_mobile"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_phone_number"/>
+
+                <EditText
+                    android:id="@+id/user_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Your mobile no"
+                    android:inputType="phone"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/complete_reg"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/background_button_reg"
+                android:text="Register"
+                android:textAlignment="center"
+                android:textColor="@color/ColorBlack"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/field_reg_verification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-34dp"
+                android:layout_below = "@id/field_reg_cycling">
+
+                <ImageView
+                    android:id="@+id/icon_user_verify_code"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_verification"/>
+
+                <EditText
+                    android:id="@+id/user_verify_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Enter verification code"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/verify_reg"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="Verify"
+                android:textSize="20dp"
+                android:textColor="@color/ColorBlack"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/background_button_verification"/>
+
+            <ProgressBar
+                android:id="@+id/reg_progbar"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </RelativeLayout>

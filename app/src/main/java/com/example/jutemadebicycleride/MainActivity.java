@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jutemadebicycleride.UserRegistration.RegistrationActivity;
+import com.example.jutemadebicycleride.UserRegistration.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
 
