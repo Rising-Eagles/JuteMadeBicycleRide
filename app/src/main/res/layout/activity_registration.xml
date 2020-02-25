@@ -18,11 +18,27 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/field_reg_profile_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/user_profile_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/reg_profile_picture"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/field_reg_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_below ="@id/field_reg_profile_picture">
 
                 <ImageView
                     android:id="@+id/icon_user_name"
@@ -102,6 +118,35 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/field_reg_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:layout_below = "@id/field_reg_address">
+
+                <ImageView
+                    android:id="@+id/icon_user_height"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_height"/>
+                <EditText
+                    android:id="@+id/user_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Your height (in cm)"
+                    android:inputType="number"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textColorHint="@color/ColorViolet"
+                    android:textAlignment="center"
+                    android:textStyle="italic"
+                    android:background="@drawable/background_inputbox_reg"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/field_reg_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,7 +198,7 @@
 
                                 <RadioButton
                                     android:id="@+id/user_gender_male"
-                                    android:layout_width="65dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Male"
                                     android:textColor="@color/ColorGreenDark"
@@ -276,10 +321,10 @@
                                     android:textStyle="bold"/>
 
                                 <RadioButton
-                                    android:id="@+id/user_profession_own_business"
+                                    android:id="@+id/user_profession_businessman"
                                     android:layout_width="wrap_content"
                                     android:layout_height="40dp"
-                                    android:text="Own Business"
+                                    android:text="Businessman"
                                     android:textColor="@color/ColorGreenDark"
                                     android:textSize="20dp"
                                     android:textStyle="bold"/>
@@ -439,7 +484,8 @@
                     android:inputType="number"
                     android:textAlignment="center"
                     android:textColorHint="@color/ColorViolet"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:maxLength="6"/>
 
             </LinearLayout>
 

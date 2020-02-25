@@ -29,14 +29,14 @@
             android:layout_below = "@id/sign_in_progbar">
 
             <ImageView
-                android:id="@+id/icon_user_mobile"
+                android:id="@+id/icon_reg_user_mobile"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:padding="2dp"
                 android:src="@drawable/sign_in_phone_number"/>
 
             <EditText
-                android:id="@+id/user_mobile"
+                android:id="@+id/reg_user_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/background_inputbox_sign_in"
@@ -50,10 +50,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/next_sign_in"
+            android:id="@+id/continue_sign_in"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Next"
+            android:text="Continue"
             android:textSize="20dp"
             android:textColor="@color/ColorBlack"
             android:textStyle="bold"
@@ -71,14 +71,14 @@
             android:layout_marginTop="-36dp">
 
             <ImageView
-                android:id="@+id/icon_user_verify_code"
+                android:id="@+id/icon_reg_user_verify_code"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="2dp"
                 android:src="@drawable/sign_in_verification" />
 
             <EditText
-                android:id="@+id/user_verify_code"
+                android:id="@+id/reg_user_verify_code"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/background_inputbox_sign_in"
