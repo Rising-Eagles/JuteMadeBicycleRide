@@ -287,10 +287,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 else{
                     // Send Verification SMS
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(("+880"+mobile_no), 60,
-                           TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, user_phone_callback);
-                    Toast.makeText(getApplicationContext(), "You have been sent a verification code to" + mobile_no + "number.", Toast.LENGTH_SHORT).show();
+                           TimeUnit.SECONDS, RegistrationActivity.this, user_phone_callback);
+                    Toast.makeText(getApplicationContext(), "You have been sent a verification code to" +
+                            ("+880"+mobile_no) + "number.", Toast.LENGTH_SHORT).show();
 
-                    // Show progress bar and verification field
+                    // Show verification section and
+                    // Hide progress bar
                     usr_verification_code.setVisibility(View.VISIBLE);
                     usr_verification_code_icon.setVisibility(View.VISIBLE);
                     verify_usr.setVisibility(View.VISIBLE);
@@ -313,18 +315,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-                    // Upload user data to the firebase database
-                    final DatabaseReference fb_database_usr_reg = FirebaseDatabase.getInstance().getReference()
-                            .child("user_information").child(registered_new_usr.getUid());
-                    Map usr_data_save = new HashMap();
-                    usr_data_save.put("name", name);
-                    usr_data_save.put("birthday", birthday);
-                    usr_data_save.put("address", address);
-                    usr_data_save.put("sex", gender);
-                    usr_data_save.put("profession", profession);
-                    usr_data_save.put("can_cycle_or_not", cycling);
-                    usr_data_save.put("mobile_number", mobile_no);
-                    fb_database_usr_reg.setValue(usr_data_save);
                 }
             }
         });
@@ -358,7 +348,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 // Verification code requirements have been filled
                 else{
                     phoneNoVerification(verification_code);
-
                 }
             }
         });
@@ -402,11 +391,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // User has entered the correct code
                         if (task.isSuccessful()) {
-                            Intent homepage = new Intent(RegistrationActivity.this, HomeActivity.class);
-                            startActivity(homepage);
-                            Toast.makeText(getApplicationContext(), "You have successfully registered to Golden J-Ride", Toast.LENGTH_LONG).show();
+                            Intent log_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
+                            startActivity(log_in_page);
+                            Toast.makeText(getApplicationContext(), "You have successfully registered to Golden E-Ride. Please sign in once more to continue", Toast.LENGTH_LONG).show();
                         }
-                        // User has entered the correct code
+                        // User has entered a wrong code
                         else{
                             Toast.makeText(getApplicationContext(), "You have entered a wrong verification code. Please check again.", Toast.LENGTH_SHORT).show();
                         }

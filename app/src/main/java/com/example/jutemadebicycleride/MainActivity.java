@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ds = new Intent(MainActivity.this, RegistrationActivity.class);
+                Intent ds = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(ds);
             }
         });

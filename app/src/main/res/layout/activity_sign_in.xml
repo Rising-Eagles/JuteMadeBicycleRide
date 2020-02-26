@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,15 +34,27 @@
                 android:padding="2dp"
                 android:src="@drawable/sign_in_phone_number"/>
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/background_inputbox_country_code"
+                android:text="+880"
+                android:textSize="28dp"
+                android:textColor="@color/ColorGreenDark"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textStyle="italic"/>
+
             <EditText
                 android:id="@+id/regd_user_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/background_inputbox_sign_in"
+                android:background="@drawable/background_inputbox_country_last_10_digits"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Your mobile no"
+                android:hint="Your mobile no (Last 10)"
                 android:inputType="phone"
+                android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColorHint="@color/ColorGreenDark"
                 android:textStyle="italic" />
@@ -58,6 +69,7 @@
             android:textSize="20dp"
             android:textColor="@color/ColorBlack"
             android:textStyle="bold"
+            android:layout_gravity="center"
             android:textAlignment="center"
             android:layout_marginTop="2dp"
             android:background="@drawable/background_button_sign_in"
@@ -87,6 +99,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="Enter verification code"
                 android:inputType="number"
+                android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColorHint="@color/ColorGreenDark"
                 android:textStyle="italic" />
@@ -101,10 +114,23 @@
             android:textSize="20dp"
             android:textColor="@color/ColorBlack"
             android:textStyle="bold"
+            android:layout_gravity="center"
             android:textAlignment="center"
             android:layout_marginTop="2dp"
             android:background="@drawable/background_button_sign_in"
             android:layout_below="@id/verify_sign_in"/>
+
+        <TextView
+            android:id="@+id/registration_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="Don't have an account?"
+            android:textColor="@color/ColorBlue"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 
