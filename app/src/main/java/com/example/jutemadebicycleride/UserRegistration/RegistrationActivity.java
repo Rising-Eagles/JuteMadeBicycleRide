@@ -68,7 +68,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private Calendar usr_calendar;
     private FirebaseAuth fbAuth;
     private FirebaseUser registered_new_usr;
-    private PhoneAuthProvider.ForceResendingToken verification_code_resend_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,7 +286,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 // All requirements have been filled
                 else{
                     // Send Verification SMS
-                    PhoneAuthProvider.getInstance().verifyPhoneNumber((mobile_no), 60,
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(("+880"+mobile_no), 60,
                            TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, user_phone_callback);
                     Toast.makeText(getApplicationContext(), "You have been sent a verification code to" + mobile_no + "number.", Toast.LENGTH_SHORT).show();
 
@@ -358,8 +357,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 // Verification code requirements have been filled
                 else{
-                    PhoneAuthCredential user_credential = PhoneAuthProvider.getCredential(usr_verification_code_id, verification_code);
-                    phoneNoVerification(user_credential);
+                    phoneNoVerification(verification_code);
 
                 }
             }
@@ -369,16 +367,14 @@ public class RegistrationActivity extends AppCompatActivity {
     // Verification state changes
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks
             user_phone_callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            usr_verification_code_id = s;
-            verification_code_resend_token = forceResendingToken;
-        }
 
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            phoneNoVerification(phoneAuthCredential);
+            String auto_verification_code = phoneAuthCredential.getSmsCode();
+            if( auto_verification_code != null){
+                usr_verification_code.setText(auto_verification_code);
+                phoneNoVerification(auto_verification_code);
+            }
         }
 
         @Override
@@ -390,10 +386,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Sorry, you can't register anymore. Golden J-Ride has reached at its maximum numbr of user requests", Toast.LENGTH_LONG).show();
             }
         }
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            usr_verification_code_id = s;
+        }
     };
 
     // User verification
-    private void phoneNoVerification(PhoneAuthCredential phoneAuthCredential){
+    private void phoneNoVerification(String usra_verification_code){
+        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(usr_verification_code_id, usra_verification_code);
         fbAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
