@@ -62,51 +62,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/continue_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="Continue"
-            android:textSize="20dp"
-            android:textColor="@color/ColorBlack"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/background_button_sign_in"
-            android:layout_below="@id/field_sign_in_verify_code"/>
-
-        <LinearLayout
-            android:id="@+id/field_sign_in_verify_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/field_sign_in_mobile_no"
-            android:layout_gravity="center"
-            android:layout_marginTop="-36dp">
-
-            <ImageView
-                android:id="@+id/icon_regd_user_verify_code"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="2dp"
-                android:src="@drawable/sign_in_verification" />
-
-            <EditText
-                android:id="@+id/regd_user_verify_code"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/background_inputbox_sign_in"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="Enter verification code"
-                android:inputType="number"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textColorHint="@color/ColorGreenDark"
-                android:textStyle="italic" />
-
-        </LinearLayout>
-
-        <Button
             android:id="@+id/verify_sign_in"
             android:layout_width="match_parent"
             android:layout_height="35dp"

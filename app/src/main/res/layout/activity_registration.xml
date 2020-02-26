@@ -477,50 +477,6 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/complete_reg"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/background_button_reg"
-                android:text="Register"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/ColorBlack"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/field_reg_verification"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="-34dp"
-                android:layout_below = "@id/field_reg_cycling">
-
-                <ImageView
-                    android:id="@+id/icon_user_verify_code"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="2dp"
-                    android:src="@drawable/reg_verification"/>
-
-                <EditText
-                    android:id="@+id/user_verify_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/background_inputbox_reg"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:hint="Enter verification code"
-                    android:inputType="number"
-                    android:textColorHint="@color/ColorViolet"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textStyle="italic"
-                    android:maxLength="6"/>
-
-            </LinearLayout>
-
-            <Button
                 android:id="@+id/verify_reg"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"

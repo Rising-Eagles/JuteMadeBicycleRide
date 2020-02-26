@@ -63,7 +63,8 @@ public class RegistrationActivity extends AppCompatActivity {
             usr_mobile, usr_verification_code;
     private RadioGroup usr_choice_gender, usr_choice_profession, usr_choice_cycling;
     private RadioButton usr_selected_gender, usr_selected_profession, usr_selected_cycling;
-    private String usr_chosen_gender, usr_chosen_profession, usr_chosen_cycling, usr_verification_code_id;
+    private String usr_chosen_gender, usr_chosen_profession, usr_chosen_cycling, usr_verification_code_id,
+            country_code_bangladesh = "+880";
     private ProgressBar registration_loader;
     private Calendar usr_calendar;
     private FirebaseAuth fbAuth;
@@ -285,31 +286,32 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 // All requirements have been filled
                 else{
-                    // Send Verification SMS
-                    PhoneAuthProvider.getInstance().verifyPhoneNumber(("+880"+mobile_no), 60,
-                           TimeUnit.SECONDS, RegistrationActivity.this, user_phone_callback);
-                    Toast.makeText(getApplicationContext(), "You have been sent a verification code to" +
-                            ("+880"+mobile_no) + "number.", Toast.LENGTH_SHORT).show();
-
-                    // Show verification section and
-                    // Hide progress bar
-                    usr_verification_code.setVisibility(View.VISIBLE);
-                    usr_verification_code_icon.setVisibility(View.VISIBLE);
-                    verify_usr.setVisibility(View.VISIBLE);
-                    registration_loader.setVisibility(View.INVISIBLE);
-
                     // Upload user profile picture to the firebase storage
-                    final StorageReference fb_storage_usr_reg = FirebaseStorage.getInstance().getReference()
-                            .child("user_prof_pic").child(image_uri.getLastPathSegment());
-                    fb_storage_usr_reg.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    StorageReference fb_storage_usr_reg = FirebaseStorage.getInstance().getReference().child("user_prof_pic");
+                    final StorageReference image_path = fb_storage_usr_reg.child(image_uri.getLastPathSegment());
+                    image_path.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // User profile picture has been uploaded and get image url
-                            fb_storage_usr_reg.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     UserProfileChangeRequest usr_profile_update = new UserProfileChangeRequest.Builder()
                                             .setDisplayName(name).setPhotoUri(uri).build();
+                                    registered_new_usr.updateProfile(usr_profile_update).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(getApplicationContext(), "Your profile picture has been uploaded", Toast.LENGTH_SHORT).show();
+                                                // Show verification section and
+                                                // Hide progress bar
+                                                usr_verification_code.setVisibility(View.VISIBLE);
+                                                usr_verification_code_icon.setVisibility(View.VISIBLE);
+                                                verify_usr.setVisibility(View.VISIBLE);
+                                                registration_loader.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -318,90 +320,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // Verify registered user
-        verify_usr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Hide verification button
-                verify_usr.setVisibility(View.INVISIBLE);
-
-                // Show progress bar
-                registration_loader.setVisibility(View.VISIBLE);
-
-                // Cast the verification field
-                final String verification_code = usr_verification_code.getText().toString();
-
-                // Validate the verification field
-                if(verification_code.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter your verification code.", Toast.LENGTH_SHORT).show();
-                    verify_usr.setVisibility(View.VISIBLE);
-                    registration_loader.setVisibility(View.INVISIBLE);
-                    return;
-                }
-                else if(verification_code.length()<6){
-                    Toast.makeText(getApplicationContext(), "Please enter a valid verification code.", Toast.LENGTH_SHORT).show();
-                    verify_usr.setVisibility(View.VISIBLE);
-                    registration_loader.setVisibility(View.INVISIBLE);
-                    return;
-                }
-                // Verification code requirements have been filled
-                else{
-                    phoneNoVerification(verification_code);
-                }
-            }
-        });
     }
 
-    // Verification state changes
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
-            user_phone_callback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            String auto_verification_code = phoneAuthCredential.getSmsCode();
-            if( auto_verification_code != null){
-                usr_verification_code.setText(auto_verification_code);
-                phoneNoVerification(auto_verification_code);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            if( e instanceof FirebaseAuthInvalidCredentialsException){
-                Toast.makeText(getApplicationContext(), "You have entered a wrong code", Toast.LENGTH_LONG).show();
-            }
-            else if( e instanceof FirebaseTooManyRequestsException){
-                Toast.makeText(getApplicationContext(), "Sorry, you can't register anymore. Golden J-Ride has reached at its maximum numbr of user requests", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            usr_verification_code_id = s;
-        }
-    };
-
-    // User verification
-    private void phoneNoVerification(String usra_verification_code){
-        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(usr_verification_code_id, usra_verification_code);
-        fbAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // User has entered the correct code
-                        if (task.isSuccessful()) {
-                            Intent log_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
-                            startActivity(log_in_page);
-                            Toast.makeText(getApplicationContext(), "You have successfully registered to Golden E-Ride. Please sign in once more to continue", Toast.LENGTH_LONG).show();
-                        }
-                        // User has entered a wrong code
-                        else{
-                            Toast.makeText(getApplicationContext(), "You have entered a wrong verification code. Please check again.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
     // Pushing an image reference to the firebase
     @Override
