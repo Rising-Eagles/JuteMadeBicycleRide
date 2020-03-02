@@ -51,20 +51,22 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     // Define all the fields
-    private ImageView usr_verification_code_icon, usr_prof_pic;
+    private ImageView usr_prof_pic;
     private static int permission_req_code = 1, image_req_code = 1;
     private Uri image_uri;
-    private Button create_usr, verify_usr;
-    private EditText usr_name, usr_birthday, usr_address, usr_height, usr_gender, usr_profession, usr_cycling,
-            usr_mobile, usr_verification_code;
+    private Button create_usr;
+    private EditText usr_name, usr_birthday, usr_address, usr_height, usr_gender, usr_profession, usr_cycling, usr_mobile,
+            usr_email, usr_password, usr_confirm_password;
     private RadioGroup usr_choice_gender, usr_choice_profession, usr_choice_cycling;
     private RadioButton usr_selected_gender, usr_selected_profession, usr_selected_cycling;
     private String usr_chosen_gender, usr_chosen_profession, usr_chosen_cycling, usr_verification_code_id,
             country_code_bangladesh = "+880";
+    private static Pattern Allowed_Password = Pattern.compile("^(?=.*?[A-Z])(?=.*?[0-9]).{6,}$");
     private ProgressBar registration_loader;
     private Calendar usr_calendar;
     private FirebaseAuth fbAuth;
@@ -87,23 +89,19 @@ public class RegistrationActivity extends AppCompatActivity {
         usr_profession = (EditText) findViewById(R.id.user_profession);
         usr_cycling = (EditText) findViewById(R.id.user_cycling);
         usr_mobile = (EditText) findViewById(R.id.user_mobile);
-        usr_verification_code = (EditText) findViewById(R.id.user_verify_code);
+        usr_email = (EditText) findViewById(R.id.user_email);
+        usr_password = (EditText) findViewById(R.id.user_password);
+        usr_confirm_password = (EditText) findViewById(R.id.user_confirm_password);
         usr_choice_gender = (RadioGroup) findViewById(R.id.user_gender_choose);
         usr_choice_profession = (RadioGroup) findViewById(R.id.user_profession_choose);
         usr_choice_cycling = (RadioGroup) findViewById(R.id.user_cycling_choose);
         create_usr = (Button) findViewById(R.id.complete_reg);
-        usr_verification_code_icon = (ImageView) findViewById(R.id.icon_user_verify_code);
-        verify_usr = (Button) findViewById(R.id.verify_reg);
         registration_loader = (ProgressBar) findViewById(R.id.reg_progbar);
         fbAuth = FirebaseAuth.getInstance();
         registered_new_usr = fbAuth.getCurrentUser();
 
         // Hide progress bar
         registration_loader.setVisibility(View.INVISIBLE);
-        // Hide verification section
-        usr_verification_code.setVisibility(View.INVISIBLE);
-        usr_verification_code_icon.setVisibility(View.INVISIBLE);
-        verify_usr.setVisibility(View.INVISIBLE);
 
         // Select user profile picture from Gallery
         usr_prof_pic.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +230,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 final String profession = usr_profession.getText().toString();
                 final String cycling = usr_cycling.getText().toString();
                 final String mobile_no = usr_mobile.getText().toString();
-
+                final String email = usr_email.getText().toString();
+                final String password = usr_password.getText().toString();
+                final String confirm_password = usr_confirm_password.getText().toString();
 
                 // Validate all the fields
                 if(name.isEmpty()){
@@ -283,40 +283,69 @@ public class RegistrationActivity extends AppCompatActivity {
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
+                else if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Toast.makeText(getApplicationContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                    create_usr.setVisibility(View.VISIBLE);
+                    registration_loader.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                else if(password.isEmpty() || password.length()<6){
+                    Toast.makeText(getApplicationContext(), "Please enter a password of at least 6 chaaracters", Toast.LENGTH_SHORT).show();
+                    create_usr.setVisibility(View.VISIBLE);
+                    registration_loader.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                else if(!Allowed_Password.matcher(password).matches()){
+                    Toast.makeText(getApplicationContext(), "Your password is took weak!!! It should contain uppercase letters and digits.",Toast.LENGTH_SHORT).show();
+                    create_usr.setVisibility(View.VISIBLE);
+                    registration_loader.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                else if(!confirm_password.equals(password)){
+                    Toast.makeText(getApplicationContext(), "Password didn't match! Try it ne more time", Toast.LENGTH_SHORT).show();
+                    create_usr.setVisibility(View.VISIBLE);
+                    registration_loader.setVisibility(View.INVISIBLE);
+                    return;
+                }
 
                 // All requirements have been filled
                 else{
-                    // Upload user profile picture to the firebase storage
-                    StorageReference fb_storage_usr_reg = FirebaseStorage.getInstance().getReference().child("user_prof_pic");
-                    final StorageReference image_path = fb_storage_usr_reg.child(image_uri.getLastPathSegment());
-                    image_path.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // User profile picture has been uploaded and get image url
-                            image_path.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    fbAuth.createUserWithEmailAndPassword(email, password).
+                            addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
-                                    UserProfileChangeRequest usr_profile_update = new UserProfileChangeRequest.Builder()
-                                            .setDisplayName(name).setPhotoUri(uri).build();
-                                    registered_new_usr.updateProfile(usr_profile_update).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(getApplicationContext(), "Your profile picture has been uploaded", Toast.LENGTH_SHORT).show();
-                                                // Show verification section and
-                                                // Hide progress bar
-                                                usr_verification_code.setVisibility(View.VISIBLE);
-                                                usr_verification_code_icon.setVisibility(View.VISIBLE);
-                                                verify_usr.setVisibility(View.VISIBLE);
-                                                registration_loader.setVisibility(View.INVISIBLE);
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        registered_new_usr.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Intent sign_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
+                                                    startActivity(sign_in_page);
+                                                    Toast.makeText(getApplicationContext(), "You have registered successfully! Please check your email to verify your registration.",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    // Since user can't be permitted to sign in without verification
+                                                    fbAuth.signOut();
+                                                    finish();
+                                                }
+                                                else{
+                                                    Toast.makeText(getApplicationContext(), "We couldn't send any verrification email since the email is not correct. Check your email please.",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    create_usr.setVisibility(View.VISIBLE);
+                                                    registration_loader.setVisibility(View.INVISIBLE);
+                                                    return;
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "Failed to create your account! Check your information please",
+                                                Toast.LENGTH_SHORT).show();
+                                        create_usr.setVisibility(View.VISIBLE);
+                                        registration_loader.setVisibility(View.INVISIBLE);
+                                        return;
+                                    }
                                 }
                             });
-                        }
-                    });
-
                 }
             }
         });

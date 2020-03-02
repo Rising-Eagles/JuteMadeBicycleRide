@@ -36,11 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="'Double click' on the box to enter your birthday...."
-                android:textColor="@color/ColorGreenDark"
-                android:textSize="20dp"
+                android:text="'Double click' to enter your birthday ...."
                 android:textAlignment="center"
-                android:textStyle="italic"/>
+                android:textColor="@color/ColorGreenDark"
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/field_reg_name"
@@ -459,7 +459,6 @@
                     android:textColor="@color/ColorViolet"
                     android:textSize="28dp"
                     android:textStyle="italic" />
-
                 <EditText
                     android:id="@+id/user_mobile"
                     android:layout_width="match_parent"
@@ -476,17 +475,111 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/field_reg_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/field_reg_mobile"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp">
+
+                <ImageView
+                    android:id="@+id/icon_user_email"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_email" />
+
+                <EditText
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Your email"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/ColorViolet"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/field_reg_email"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp">
+
+                <ImageView
+                    android:id="@+id/icon_user_password"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_password" />
+
+                <EditText
+                    android:id="@+id/user_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Your password"
+                    android:inputType="text"
+                    android:textColorHint="@color/ColorViolet"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/field_reg_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/field_reg_password"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp">
+
+                <ImageView
+                    android:id="@+id/icon_user_confirm_password"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="2dp"
+                    android:src="@drawable/reg_confirm_password" />
+
+                <EditText
+                    android:id="@+id/user_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background_inputbox_reg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Re-type your password"
+                    android:inputType="text"
+                    android:textColorHint="@color/ColorViolet"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
             <Button
-                android:id="@+id/verify_reg"
+                android:id="@+id/complete_reg"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:text="Verify"
+                android:text="Register"
                 android:textSize="20dp"
                 android:textColor="@color/ColorBlack"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="2dp"
-                android:background="@drawable/background_button_verification"/>
+                android:background="@drawable/background_button_reg"
+                android:layout_below="@id/field_reg_confirm_password"/>
 
             <ProgressBar
                 android:id="@+id/reg_progbar"
