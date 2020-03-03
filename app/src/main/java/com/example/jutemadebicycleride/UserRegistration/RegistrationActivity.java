@@ -311,32 +311,35 @@ public class RegistrationActivity extends AppCompatActivity {
                 // All requirements have been filled
                 else{
                     fbAuth.createUserWithEmailAndPassword(email, password).
-                            addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                            addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        registered_new_usr.sendEmailVerification()
-                                                .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Intent sign_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
-                                                    startActivity(sign_in_page);
-                                                    Toast.makeText(RegistrationActivity.this, "You have registered successfully! Please check your email to verify your registration.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    // Since user can't be permitted to sign in without verification
-                                                    fbAuth.signOut();
-                                                    finish();
-                                                }
-                                                else{
-                                                    Toast.makeText(RegistrationActivity.this, "We couldn't send any verrification email since the email is not correct. Check your email please.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    create_usr.setVisibility(View.VISIBLE);
-                                                    registration_loader.setVisibility(View.INVISIBLE);
-                                                    return;
-                                                }
-                                            }
-                                        });
+
+                                        // Send user a verification email
+                                        if(registered_new_usr != null){
+                                            registered_new_usr.sendEmailVerification()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if(task.isSuccessful()){
+                                                                // Since user can't be permitted to sign in without verification
+                                                                fbAuth.signOut();
+                                                                Intent sign_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
+                                                                startActivity(sign_in_page);
+                                                                Toast.makeText(RegistrationActivity.this, "You have registered successfully! Please check your email to verify your registration.",
+                                                                        Toast.LENGTH_SHORT).show();
+                                                            }
+                                                            else{
+                                                                Toast.makeText(RegistrationActivity.this, "We couldn't send any verrification email since the email is not correct. Check your email please.",
+                                                                        Toast.LENGTH_SHORT).show();
+                                                                create_usr.setVisibility(View.VISIBLE);
+                                                                registration_loader.setVisibility(View.INVISIBLE);
+                                                                return;
+                                                            }
+                                                        }
+                                                    });
+                                        }
                                     }
                                     else{
                                         Toast.makeText(RegistrationActivity.this, "Failed to create your account! Check your information please",
