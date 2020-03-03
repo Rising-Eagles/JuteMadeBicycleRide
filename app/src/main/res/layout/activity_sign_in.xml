@@ -40,7 +40,7 @@
             <ImageView
                 android:id="@+id/icon_regd_user_email"
                 android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:padding="2dp"
                 android:src="@drawable/sign_in_email"/>
 
@@ -71,7 +71,7 @@
             <ImageView
                 android:id="@+id/icon_regd_user_password"
                 android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:padding="2dp"
                 android:src="@drawable/sign_in_password"/>
 
@@ -111,7 +111,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="5dp"
             android:layout_gravity="center"
-            android:text="You have attempts remaining : "
+            android:text="Attempts remaining : "
             android:textAlignment="center"
             android:textColor="@color/ColorBlueDark"
             android:textSize="20sp"

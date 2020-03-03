@@ -445,7 +445,7 @@
                 <ImageView
                     android:id="@+id/icon_user_mobile"
                     android:layout_width="40dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:padding="2dp"
                     android:src="@drawable/reg_phone_number"/>
 

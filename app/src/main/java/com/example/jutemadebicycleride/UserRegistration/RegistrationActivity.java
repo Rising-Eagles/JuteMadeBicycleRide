@@ -112,7 +112,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     if(ContextCompat.checkSelfPermission(RegistrationActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED){
                         if(ActivityCompat.shouldShowRequestPermissionRationale(RegistrationActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-                            Toast.makeText(getApplicationContext(), "Please allow us to access your gallery", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, "Please allow us to access your gallery", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             ActivityCompat.requestPermissions(RegistrationActivity.this,
@@ -236,73 +236,73 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 // Validate all the fields
                 if(name.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter your name.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please enter your name.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(birthday.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please tell your birthday.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please tell your birthday.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(address.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter your address.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please enter your address.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(height.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter your height.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please enter your height.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(gender.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please select your gender.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please select your gender.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(profession.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please select your profession.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please select your profession.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(cycling.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please tell whether you can do cycling.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please tell whether you can do cycling.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(mobile_no.isEmpty() || !Patterns.PHONE.matcher(mobile_no).matches()){
-                    Toast.makeText(getApplicationContext(), "Please write your valid mobile number.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please write your valid mobile number.", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    Toast.makeText(getApplicationContext(), "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(password.isEmpty() || password.length()<6){
-                    Toast.makeText(getApplicationContext(), "Please enter a password of at least 6 chaaracters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please enter a password of at least 6 chaaracters", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(!Allowed_Password.matcher(password).matches()){
-                    Toast.makeText(getApplicationContext(), "Your password is took weak!!! It should contain uppercase letters and digits.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Your password is took weak!!! It should contain uppercase letters and digits.",Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
                 }
                 else if(!confirm_password.equals(password)){
-                    Toast.makeText(getApplicationContext(), "Password didn't match! Try it ne more time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Password didn't match! Try it ne more time", Toast.LENGTH_SHORT).show();
                     create_usr.setVisibility(View.VISIBLE);
                     registration_loader.setVisibility(View.INVISIBLE);
                     return;
@@ -321,14 +321,14 @@ public class RegistrationActivity extends AppCompatActivity {
                                                 if(task.isSuccessful()){
                                                     Intent sign_in_page = new Intent(RegistrationActivity.this, SignInActivity.class);
                                                     startActivity(sign_in_page);
-                                                    Toast.makeText(getApplicationContext(), "You have registered successfully! Please check your email to verify your registration.",
+                                                    Toast.makeText(RegistrationActivity.this, "You have registered successfully! Please check your email to verify your registration.",
                                                             Toast.LENGTH_SHORT).show();
                                                     // Since user can't be permitted to sign in without verification
                                                     fbAuth.signOut();
                                                     finish();
                                                 }
                                                 else{
-                                                    Toast.makeText(getApplicationContext(), "We couldn't send any verrification email since the email is not correct. Check your email please.",
+                                                    Toast.makeText(RegistrationActivity.this, "We couldn't send any verrification email since the email is not correct. Check your email please.",
                                                             Toast.LENGTH_SHORT).show();
                                                     create_usr.setVisibility(View.VISIBLE);
                                                     registration_loader.setVisibility(View.INVISIBLE);
@@ -338,7 +338,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         });
                                     }
                                     else{
-                                        Toast.makeText(getApplicationContext(), "Failed to create your account! Check your information please",
+                                        Toast.makeText(RegistrationActivity.this, "Failed to create your account! Check your information please",
                                                 Toast.LENGTH_SHORT).show();
                                         create_usr.setVisibility(View.VISIBLE);
                                         registration_loader.setVisibility(View.INVISIBLE);
