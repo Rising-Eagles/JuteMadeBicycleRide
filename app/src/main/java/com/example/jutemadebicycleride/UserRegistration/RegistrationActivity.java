@@ -315,7 +315,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
-                                        registered_new_usr.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        registered_new_usr.sendEmailVerification()
+                                                .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
